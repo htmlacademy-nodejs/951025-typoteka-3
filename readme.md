@@ -1,7 +1,7 @@
 # Личный проект «Типотека» [![Build status][travis-image]][travis-url]
 
 * Студент: [Андрей](https://up.htmlacademy.ru/nodejs/3/user/951025).
-* Наставник: `Неизвестно`.
+* Наставник: `Юрий Кучма`.
 
 ---
 

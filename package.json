@@ -1,7 +1,7 @@
 {
   "name": "951025-typoteka-3",
   "version": "1.0.0",
-  "description": "Куплю.Продам",
+  "description": "Типотека",
   "main": "./src/service/service.js",
   "scripts": {
     "start": "node ./src/service/service.js",

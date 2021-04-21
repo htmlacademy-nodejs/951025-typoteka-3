@@ -77,7 +77,7 @@ module.exports = {
     const content = JSON.stringify(generateMocks(countMocks));
 
     if (count > MAX_ELEMENTS) {
-      console.error(chalk.red(`Нельзя записать в файл больше 1000 моков`));
+      console.error(chalk.red(`Нельзя записать в файл больше ${MAX_ELEMENTS} моков`));
       process.exit(ExitCode.FAIL);
     }
 

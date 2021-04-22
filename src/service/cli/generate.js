@@ -1,7 +1,7 @@
 const {getRandomInt, getRandomDate, shuffle} = require(`../../utils`);
 const {ExitCode} = require(`../../const`);
 
-const fs = require(`fs`);
+const fs = require(`fs/promises`);
 const chalk = require(`chalk`);
 
 const MIN_ELEMENTS = 1;
@@ -71,23 +71,22 @@ const generateMocks = (count) => (
 
 module.exports = {
   name: `--generate`,
-  run(args) {
+  async run(args) {
     const [count] = args;
     const countMocks = Number.parseInt(count, 10) || MIN_ELEMENTS;
     const content = JSON.stringify(generateMocks(countMocks));
 
     if (count > MAX_ELEMENTS) {
-      console.error(`Нельзя записать в файл больше ${chalk.red(1000)} моков`);
+      console.error(chalk.red(`Нельзя записать в файл больше ${MAX_ELEMENTS} моков`));
       process.exit(ExitCode.FAIL);
     }
 
-    fs.writeFile(FILE_NAME, content, (err) => {
-      if (err) {
-        console.error(`Произошла ошибка записи файла ${FILE_NAME}, ${chalk.red(`ошибка: ${err}`)}`);
-        process.exit(ExitCode.FAIL);
-      }
-
-      return console.info(`${chalk.greenBright(`Запись в файл успешно завершена`)}`);
-    });
+    try {
+      await fs.writeFile(FILE_NAME, content);
+      console.info(`${chalk.greenBright(`Запись в файл успешно завершена`)}`);
+    } catch (err) {
+      console.error(chalk.red(`Произошла ошибка записи файла ${FILE_NAME}, ошибка: ${err}`));
+      process.exit(ExitCode.FAIL);
+    }
   }
 };

@@ -1,8 +1,8 @@
 const {Router} = require(`express`);
 const mainRoutes = new Router();
 
-mainRoutes.get(`/`, (req, res) => res.send(`/`));
-mainRoutes.get(`/register`, (req, res) => res.send(`/register`));
-mainRoutes.get(`/login`, (req, res) => res.send(`/login`));
+mainRoutes.get(`/`, (req, res) => res.render(`main`));
+mainRoutes.get(`/register`, (req, res) => res.render(`sign-up`));
+mainRoutes.get(`/login`, (req, res) => res.render(`login`));
 
 module.exports = mainRoutes;

@@ -15,10 +15,13 @@ const HttpCode = {
   INTERNAL_SERVER_ERROR: 500,
 };
 
+const MAX_ID_LENGTH = 8;
+
 module.exports = {
   DEFAULT_COMMAND,
   USER_ARGV_INDEX,
   ExitCode,
   DEFAULT_PORT,
   HttpCode,
+  MAX_ID_LENGTH,
 };

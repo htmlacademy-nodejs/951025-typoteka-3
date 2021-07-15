@@ -1,11 +1,11 @@
 class CategoryService {
-  constructor(posts) {
-    this._posts = posts;
+  constructor(articles) {
+    this._articles = articles;
   }
 
   getAll() {
-    return this._posts.reduce((acc, post) => {
-      post.category.forEach((category) => acc.add(category));
+    return this._articles.reduce((acc, article) => {
+      article.category.forEach((category) => acc.add(category));
       return acc;
     }, new Set());
   }

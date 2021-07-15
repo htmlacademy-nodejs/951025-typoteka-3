@@ -1,11 +1,11 @@
 class SearchService {
-  constructor(posts) {
-    this._posts = posts;
+  constructor(articles) {
+    this._articles = articles;
   }
 
   getAll(searchText) {
-    return this._posts
-      .filter((post) => post.title.includes(searchText));
+    return this._articles
+      .filter((article) => article.title.includes(searchText));
   }
 }
 

@@ -12,7 +12,7 @@ class ArticleService {
       comments: [],
     }, article);
 
-    return this._articles.push(newArticle);
+    this._articles.push(newArticle);
   }
 
   delete(id) {

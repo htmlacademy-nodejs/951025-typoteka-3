@@ -1,6 +1,6 @@
 const DEFAULT_COMMAND = `--help`;
 const USER_ARGV_INDEX = 2;
-const DEFAULT_PORT = 3000;
+const DEFAULT_PORT = 6001;
 
 const ExitCode = {
   SUCCESS: 0,
@@ -18,6 +18,7 @@ const HttpCode = {
 };
 
 const MAX_ID_LENGTH = 8;
+const API_PREFIX = `/api`;
 
 module.exports = {
   DEFAULT_COMMAND,
@@ -26,4 +27,5 @@ module.exports = {
   DEFAULT_PORT,
   HttpCode,
   MAX_ID_LENGTH,
+  API_PREFIX,
 };

@@ -14,7 +14,7 @@ const getMockData = require(`../lib/get-mock-data`);
 const app = new Router();
 
 (async () => {
-  const mockData = getMockData();
+  const mockData = await getMockData();
 
   article(app, new ArticleService(mockData), new CommentService());
   category(app, new CategoryService(mockData));

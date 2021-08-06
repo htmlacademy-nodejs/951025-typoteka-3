@@ -4,10 +4,12 @@ class CategoryService {
   }
 
   getAll() {
-    return this._articles.reduce((acc, article) => {
+    const categories = this._articles.reduce((acc, article) => {
       article.category.forEach((category) => acc.add(category));
       return acc;
     }, new Set());
+
+    return [...categories];
   }
 }
 

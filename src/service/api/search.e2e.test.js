@@ -3,7 +3,7 @@ const request = require(`supertest`);
 const search = require(`./search`);
 const SearchService = require(`../data-service/search`);
 const {HttpCode} = require(`../../const`);
-const mockData = require(`../../data/mock-data.json`);
+const mockData = require(`../../data/mock-data-search.json`);
 
 const app = express();
 app.use(express.json());

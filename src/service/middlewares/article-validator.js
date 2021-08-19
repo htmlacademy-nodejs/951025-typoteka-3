@@ -7,9 +7,9 @@ module.exports = (req, res, next) => {
   const keysExists = articleKeys.every((key) => keys.includes(key));
 
   if (!keysExists) {
-    return req.status(HttpCode.BAD_REQUEST)
+    res.status(HttpCode.BAD_REQUEST)
       .send(`Not enough article's parameters. Bad request`);
   }
 
-  return next();
+  next();
 };

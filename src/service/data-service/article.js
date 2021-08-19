@@ -13,6 +13,7 @@ class ArticleService {
     }, article);
 
     this._articles.push(newArticle);
+    return newArticle;
   }
 
   delete(id) {

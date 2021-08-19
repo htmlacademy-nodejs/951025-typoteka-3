@@ -3,9 +3,8 @@ const pino = require(`pino`);
 const logger = pino({
   name: `base-logger`,
   level: `info`,
+  prettyPrint: true,
 });
-
-// console.log(logger.name); // Почему undefined ?
 
 module.exports = {
   logger,

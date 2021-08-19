@@ -173,3 +173,85 @@ test(`API refuses to delete non-existed article`, () => {
     .expect(HttpCode.NOT_FOUND);
 });
 
+describe(`API returns a list of comments of an article`, () => {
+  const app = createApi();
+  let response;
+
+  beforeAll(async () => {
+    response = await request(app)
+      .get(`/articles/-BfPw855/comments`);
+  });
+
+  test(`Returns status code 200`, () => expect(response.statusCode).toBe(HttpCode.OK));
+  test(`Returns 4 comments`, () => expect(response.body.length).toBe(4));
+  test(`First comment id is "3ZZomiGu"`, () => expect(response.body[0].id).toBe(`3ZZomiGu`));
+});
+
+describe(`API creates a comment with valid data`, () => {
+  const app = createApi();
+  let response;
+
+  const newComment = {
+    text: `Text of new comment`,
+  };
+
+  beforeAll(async () => {
+    response = await request(app)
+      .post(`/articles/-BfPw855/comments`)
+      .send(newComment);
+  });
+
+  test(`Returns status code 201`, () => expect(response.statusCode).toBe(HttpCode.CREATED));
+  test(`Returns created comment`, () => expect(response.body).toEqual(expect.objectContaining(newComment)));
+  test(`Returns 5 comments`, () => request(app)
+    .get(`/articles/-BfPw855/comments`)
+    .expect((res) => expect(res.body.length).toBe(5))
+  );
+});
+
+describe(`API refuses to create a comment`, () => {
+  const app = createApi();
+
+  test(`If article doesn't exist`, () => {
+    return request(app)
+      .post(`/articles/NO_ARTICLE/comments`)
+      .send({text: `Valid comment`})
+      .expect(HttpCode.NOT_FOUND);
+  });
+  test(`If comment's data is invalid`, () => {
+    return request(app)
+      .post(`/articles/-BfPw855/comments`)
+      .send({})
+      .expect(HttpCode.BAD_REQUEST);
+  });
+});
+
+describe(`API deletes a comment`, () => {
+  const app = createApi();
+  let response;
+
+  beforeAll(async () => {
+    response = await request(app)
+      .delete(`/articles/sHN0hMC9/comments/iAK-vQeJ`);
+  });
+
+  test(`Returns status code 200`, () => expect(response.statusCode).toBe(HttpCode.OK));
+  test(`Returns deleted comment`, () => expect(response.body.id).toBe(`iAK-vQeJ`));
+  test(`Comments length changes from 2 to 1`, () => request(app)
+    .get(`/articles/sHN0hMC9/comments`)
+    .expect((res) => expect(res.body.length).toBe(1))
+  );
+});
+
+describe(`API refuses to delete a comment`, () => {
+  const app = createApi();
+
+  test(`If comment doesn't exist`, () => request(app)
+    .delete(`/articles/sHN0hMC9/comments/COMMENT_DOESNT_EXIST`)
+    .expect(HttpCode.NOT_FOUND)
+  );
+  test(`If article doesn't exist`, () => request(app)
+    .delete(`/articles/ARTICLE_DOESNT_EXIST/comments/comment_id`)
+    .expect(HttpCode.NOT_FOUND)
+  );
+});

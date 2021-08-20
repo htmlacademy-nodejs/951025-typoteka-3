@@ -1,16 +1,9 @@
-const express = require(`express`);
 const request = require(`supertest`);
 const search = require(`./search`);
 const SearchService = require(`../data-service/search`);
+const createApi = require(`../helpers/create-api`);
 const {HttpCode} = require(`../../const`);
 const mockData = require(`../../data/mock-data-search.json`);
-
-const createApi = (services) => {
-  const app = express();
-  app.use(express.json());
-  search(app, ...services);
-  return app;
-};
 
 let app = null;
 let response = null;
@@ -20,7 +13,7 @@ describe(`Search`, () => {
   describe(`API returns article based on query`, () => {
     beforeEach(async () => {
       searchService = new SearchService(mockData);
-      app = createApi([searchService]);
+      app = createApi(search, [searchService]);
     });
     test(`Status code 200`, async () => {
       response = await request(app).get(`/search`).query({
@@ -48,7 +41,7 @@ describe(`Search`, () => {
   describe(`API refuses to return offer`, () => {
     beforeEach(async () => {
       searchService = new SearchService(mockData);
-      app = createApi([searchService]);
+      app = createApi(search, [searchService]);
     });
     test(`Status code 404 if article is not found`, (done) => {
       request(app).get(`/search`).query({

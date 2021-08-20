@@ -9,7 +9,7 @@ let app = null;
 let response = null;
 let categoryService = null;
 
-describe(`category`, () => {
+describe(`Category`, () => {
   describe(`Api returns category list`, () => {
     beforeEach(async () => {
       categoryService = new CategoryService(mockData);

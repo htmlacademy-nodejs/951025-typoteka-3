@@ -45,5 +45,5 @@ const defaultAPI = new API(defaultURL, TIMEOUT);
 
 module.exports = {
   API,
-  defaultAPI,
+  getAPI: () => defaultAPI,
 };

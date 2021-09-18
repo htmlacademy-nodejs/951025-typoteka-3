@@ -62,13 +62,13 @@ block content
       h2.visually-hidden Список превью статей
       ul.preview__list
         each article in articles
-          li.preview__item
+          li.preview__item(class=article.picture ? `` : `preview__item--noimage`)
             ul.preview__breadcrumbs
               li.preview__breadcrumbs-item
                 a.preview__breadcrumbs-link(href='#') #{article.category}
             .preview__background
               img.preview__background-image(src='img/skyscraper@1x.jpg' width='460' height='240' srcset='img/skyscraper@1x.jpg 1x, img/skyscraper@2x.jpg 2x' alt='Фотография небоскреба')
-            time.preview__time(datetime='2019-03-21T20:33') 21.03.2019, 20:33
+            time.preview__time(datetime=article.date) #{article.outputDate}
             h3.preview__name
               a.preview__name-link(href='#') #{article.title}
             p.preview__text

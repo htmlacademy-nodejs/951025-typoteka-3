@@ -12,12 +12,10 @@ app.set(`view engine`, `pug`);
 const mainRoutes = require(`./routes/main-routes`);
 const myRoutes = require(`./routes/my-routes`);
 const arcticlesRoutes = require(`./routes/articles-routes`);
-const utilsRoutes = require(`./routes/utils-routes`);
 
 app.use(express.static(path.resolve(__dirname, PUBLIC_DIR)));
 app.use(`/`, mainRoutes);
 app.use(`/my`, myRoutes);
 app.use(`/articles`, arcticlesRoutes);
-app.use(`/`, utilsRoutes);
 
 app.listen(DEFAULT_PORT);

@@ -25,6 +25,12 @@ const Env = {
   PRODUCTION: `production`,
 };
 
+const Directory = {
+  PUBLIC: `public`,
+  TEMPLATES: `templates`,
+  UPLOAD: `upload`,
+};
+
 module.exports = {
   DEFAULT_COMMAND,
   USER_ARGV_INDEX,
@@ -34,4 +40,5 @@ module.exports = {
   MAX_ID_LENGTH,
   API_PREFIX,
   Env,
+  Directory,
 };

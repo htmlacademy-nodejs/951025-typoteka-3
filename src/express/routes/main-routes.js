@@ -13,7 +13,17 @@ mainRoutes.get(`/`, async (req, res) => {
 });
 
 mainRoutes.get(`/categories`, (req, res) => res.render(`all-categories`));
-mainRoutes.get(`/search`, (req, res) => res.render(`search`));
+
+mainRoutes.get(`/search`, async (req, res) => {
+  try {
+    const {query} = req.query;
+    const results = await api.search(query);
+    res.render(`search`, {results: results.map(modifiedArticle)});
+  } catch (error) {
+    res.render(`search`, {results: []});
+  }
+});
+
 mainRoutes.get(`/register`, (req, res) => res.render(`sign-up`));
 mainRoutes.get(`/login`, (req, res) => res.render(`login`));
 

@@ -1,8 +1,8 @@
 const {Router} = require(`express`);
-const {HttpCode} = require(`../../const`);
-const articleValidator = require(`../middlewares/article-validator`);
-const articleExists = require(`../middlewares/article-exists`);
-const commentValidator = require(`../middlewares/comment-validator`);
+const {HttpCode} = require(`../../../const`);
+const articleValidator = require(`../../middlewares/article-validator`);
+const articleExists = require(`../../middlewares/article-exists`);
+const commentValidator = require(`../../middlewares/comment-validator`);
 
 module.exports = (app, articleService, commentService) => {
   const route = new Router();

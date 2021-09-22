@@ -1,10 +1,10 @@
 const request = require(`supertest`);
 const article = require(`./article`);
-const ArticleService = require(`../data-service/article`);
-const CommentService = require(`../data-service/comment`);
-const createApi = require(`../helpers/create-api`);
-const {HttpCode} = require(`../../const`);
-const mockData = require(`../../data/mocks-data-article.json`);
+const ArticleService = require(`../../data-service/article`);
+const CommentService = require(`../../data-service/comment`);
+const createApi = require(`../../helpers/create-api`);
+const {HttpCode} = require(`../../../const`);
+const mockData = require(`../../../data/mocks-data-article.json`);
 
 // new ArticleService(clonedData), new CommentService()
 

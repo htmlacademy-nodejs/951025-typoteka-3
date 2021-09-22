@@ -6,7 +6,15 @@ block content
       .search-page__wrapper
         h1 Поиск
         .search.search-page__form
-          form(action='#' method='get')
+          form(action='/search' method='get')
             label
-              input(type='text' name='search' placeholder='Что ищем?')
+              input(type='text' name='query' placeholder='Что ищем?')
             button.search__button.button.button--transparent(type='submit') Найти
+          each article in results
+            .search__result
+              time.search__date(datetime=article.date) #{article.outputDate}
+              a.search__link(href=`/articles/${article.id}`) !{article.title}
+        if !results.length
+          p.search-page__empty
+            | Публикаций не найдено
+

@@ -1,9 +1,9 @@
 const request = require(`supertest`);
 const search = require(`./search`);
-const SearchService = require(`../data-service/search`);
-const createApi = require(`../helpers/create-api`);
-const {HttpCode} = require(`../../const`);
-const mockData = require(`../../data/mock-data-search.json`);
+const SearchService = require(`../../data-service/search`);
+const createApi = require(`../../helpers/create-api`);
+const {HttpCode} = require(`../../../const`);
+const mockData = require(`../../../data/mock-data-search.json`);
 
 let app = null;
 let response = null;

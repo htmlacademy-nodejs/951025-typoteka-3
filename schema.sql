@@ -40,3 +40,5 @@ CREATE TABLE article_categories(
   FOREIGN KEY (article_id) REFERENCES articles(id),
   FOREIGN KEY (category_id) REFERENCES categories(id)
 );
+
+CREATE INDEX ON articles(title);

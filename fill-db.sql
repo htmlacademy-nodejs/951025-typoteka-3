@@ -1,8 +1,8 @@
 -- Insert data into users table
 
 INSERT INTO users(email, first_name, last_name, password_hash, avatar) VALUES
-('jackson@example.com', 'Michael', 'Jackson', 'ha21nskz83jsnjcxdnqi9123bb1123b12', 'avatar-1.jpg'),
-('williams@example.com', 'Tony', 'Williams', 'ha21nskz83jsnjcxdnqi9123bb1123b12', 'avatar-2.jpg');
+('jackson@example.com', 'Michael', 'Jackson', 'ha21nskz83jsnjcxdnqi9123bb1123b12', 'avatar-1.png'),
+('williams@example.com', 'Tony', 'Williams', 'ha21nskz83jsnjcxdnqi9123bb1123b12', 'avatar-2.png');
 
 -- Insert data into categories table
 

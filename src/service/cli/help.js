@@ -13,6 +13,8 @@ module.exports = {
         --help:               печатает этот текст
         --generate <count>    формирует файл mocks.json
         --server <port>       запускает сервер
+        --fill                заполняет БД
+        --filldb              заполняет БД с помощью Sequelize
     `));
   }
 };

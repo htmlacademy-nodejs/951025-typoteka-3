@@ -1,11 +1,18 @@
-const defineCategory = require(`./category`);
-const defineComment = require(`./comment`);
-const defineArticle = require(`./article`);
+const {Model, DataTypes} = require(`sequelize`);
 
 module.exports = (sequelize) => {
-  const Category = defineCategory(sequelize);
-  const Comment = defineComment(sequelize);
-  const Article = defineArticle(sequelize);
+  class Comment extends Model {}
 
-  return {Category, Comment, Article};
+  Comment.init({
+    text: {
+      type: DataTypes.STRING,
+      allowNull: false
+    }
+  }, {
+    sequelize,
+    modelName: `Comment`,
+    tableName: `comments`
+  });
+
+  return Comment;
 };

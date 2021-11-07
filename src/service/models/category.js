@@ -1,8 +1,8 @@
 const {Model, DataTypes} = require(`sequelize`);
 
-class Category extends Model {}
-
 module.exports = (sequelize) => {
+  class Category extends Model {}
+
   Category.init({
     name: {
       type: DataTypes.STRING,

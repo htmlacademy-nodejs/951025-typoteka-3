@@ -1,6 +1,7 @@
 module.exports = {
   ARTICLES: `articles`,
+  ARTICLE_CATEGORIES: `articleCategories`,
   CATEGORIES: `categories`,
   COMMENTS: `comments`,
-  ARTICLE_CATEGORIES: `articleCategories`
+  USERS: `users`,
 };

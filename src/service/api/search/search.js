@@ -13,7 +13,7 @@ module.exports = (app, service) => {
       return;
     }
 
-    const searchResults = service.getAll(query);
+    const searchResults = service.findAll(query);
     const searchStatus = searchResults.length > 0 ? HttpCode.OK : HttpCode.NOT_FOUND;
 
     res.status(searchStatus).json(searchResults);

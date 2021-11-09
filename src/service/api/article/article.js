@@ -9,13 +9,13 @@ module.exports = (app, articleService, commentService) => {
   app.use(`/articles`, route);
 
   route.get(`/`, async (req, res) => {
-    const articles = await articleService.getAll();
+    const articles = await articleService.findAll();
     res.status(HttpCode.OK).json(articles);
   });
 
   route.get(`/:articleId`, async (req, res) => {
     const {articleId} = req.params;
-    const article = await articleService.getOne(articleId);
+    const article = await articleService.findOne(articleId);
 
     if (!article) {
       return res.status(HttpCode.NOT_FOUND)
@@ -59,7 +59,7 @@ module.exports = (app, articleService, commentService) => {
 
   route.get(`/:articleId/comments`, articleExists(articleService), async (req, res) => {
     const {article} = res.locals;
-    const comments = commentService.getAll(article);
+    const comments = commentService.findAll(article);
 
     res.status(HttpCode.OK).json(comments);
   });

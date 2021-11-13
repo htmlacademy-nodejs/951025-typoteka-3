@@ -5,8 +5,12 @@ const mainRoutes = new Router();
 
 mainRoutes.get(`/`, async (req, res) => {
   try {
-    const articles = await api.getArticles();
-    res.render(`main`, {articles: articles.map(modifiedArticle)});
+    const [articles, categories] = await Promise.all([
+      api.getArticles(),
+      api.getCategories(true),
+    ]);
+
+    res.render(`main`, {articles: articles.map(modifiedArticle), categories});
   } catch (error) {
     console.log(error);
   }

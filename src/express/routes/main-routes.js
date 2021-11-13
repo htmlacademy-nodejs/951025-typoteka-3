@@ -12,7 +12,14 @@ mainRoutes.get(`/`, async (req, res) => {
   }
 });
 
-mainRoutes.get(`/categories`, (req, res) => res.render(`all-categories`));
+mainRoutes.get(`/categories`, async (req, res, next) => {
+  try {
+    const categories = await api.getCategories();
+    res.render(`all-categories`, {categories});
+  } catch (error) {
+    next(error);
+  }
+});
 
 mainRoutes.get(`/search`, async (req, res) => {
   try {

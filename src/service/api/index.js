@@ -8,6 +8,7 @@ const {
 const {Router} = require(`express`);
 const article = require(`./article/article`);
 const category = require(`./category/category`);
+const comments = require(`./comments/comments`);
 const search = require(`./search/search`);
 const sequelize = require(`../lib/sequelize`);
 const defineModels = require(`../models`);
@@ -18,6 +19,7 @@ defineModels(sequelize);
 (async () => {
   article(app, new ArticleService(sequelize), new CommentService(sequelize));
   category(app, new CategoryService(sequelize));
+  comments(app, new CommentService(sequelize));
   search(app, new SearchService(sequelize));
 })();
 

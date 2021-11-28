@@ -59,7 +59,7 @@ module.exports = (app, articleService, commentService) => {
 
   route.get(`/:articleId/comments`, articleExists(articleService), async (req, res) => {
     const {article} = res.locals;
-    const comments = await commentService.findAll(article);
+    const comments = await commentService.findAllByArticleId(article);
 
     res.status(HttpCode.OK).json(comments);
   });

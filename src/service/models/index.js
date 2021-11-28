@@ -12,13 +12,13 @@ module.exports = (sequelize) => {
   const User = defineUser(sequelize);
 
   Article.hasMany(Comment, {as: Aliase.COMMENTS, foreignKey: `articleId`, onDelete: `cascade`});
-  Comment.belongsTo(Article, {foreignKey: `articleId`});
+  Comment.belongsTo(Article, {as: Aliase.ARTICLES, foreignKey: `articleId`});
 
   User.hasMany(Article, {as: Aliase.ARTICLES, foreignKey: `userId`, onDelete: `cascade`});
   Article.belongsTo(User, {foreignKey: `userId`});
 
   User.hasMany(Comment, {as: Aliase.COMMENTS, foreignKey: `userId`, onDelete: `cascade`});
-  Comment.belongsTo(User, {foreignKey: `userId`});
+  Comment.belongsTo(User, {foreignKey: `userId`, as: Aliase.USERS});
 
   class ArticleCategories extends Model {}
   ArticleCategories.init({}, {sequelize});

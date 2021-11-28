@@ -33,6 +33,12 @@ class API {
     return this._load(`/categories`, {params: {count}});
   }
 
+  getComments(limit, withArticlesData) {
+    return this._load(`/comments`, {
+      params: {limit, withArticlesData}
+    });
+  }
+
   async createArticle(data) {
     return this._load(`/articles`, {
       method: `POST`,

@@ -4,7 +4,6 @@ const CategoryService = require(`../../data-service/category`);
 // const createApi = require(`../../helpers/create-api`);
 const {HttpCode} = require(`../../../const`);
 const {Sequelize} = require(`sequelize`);
-
 const express = require(`express`);
 const fillDb = require(`../../lib/fill-db`);
 

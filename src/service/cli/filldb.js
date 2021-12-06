@@ -40,7 +40,8 @@ const users = [
 
 const generateComments = (count, comments) => (
   Array(count).fill({}).map(() => ({
-    text: shuffle(comments).slice(0, getRandomInt(1, comments.length)).join(` `)
+    text: shuffle(comments).slice(0, getRandomInt(1, comments.length)).join(` `),
+    userId: 1,
   }))
 );
 
@@ -59,7 +60,8 @@ const generateArticles = (count, contentType) => (
     announcement: shuffle(contentType.sentences).slice(0, getRandomInt(1, 6)).join(` `),
     fullText: shuffle(contentType.sentences).slice(0, getRandomInt(1, contentType.sentences.length - 1)).join(` `),
     category: shuffle(contentType.categories).slice(0, getRandomInt(1, contentType.categories.length - 1)),
-    comments: generateComments(getRandomInt(1, MAX_COMMENTS), contentType.comments)
+    comments: generateComments(getRandomInt(1, MAX_COMMENTS), contentType.comments),
+    userId: 1,
   }))
 );
 

@@ -5,14 +5,26 @@ const mainRoutes = new Router();
 
 mainRoutes.get(`/`, async (req, res) => {
   try {
-    const articles = await api.getArticles();
-    res.render(`main`, {articles: articles.map(modifiedArticle)});
+    const [articles, categories, comments] = await Promise.all([
+      api.getArticles(),
+      api.getCategories(true),
+      api.getComments(3),
+    ]);
+
+    res.render(`main`, {articles: articles.map(modifiedArticle), categories, comments});
   } catch (error) {
     console.log(error);
   }
 });
 
-mainRoutes.get(`/categories`, (req, res) => res.render(`all-categories`));
+mainRoutes.get(`/categories`, async (req, res, next) => {
+  try {
+    const categories = await api.getCategories();
+    res.render(`all-categories`, {categories});
+  } catch (error) {
+    next(error);
+  }
+});
 
 mainRoutes.get(`/search`, async (req, res) => {
   try {

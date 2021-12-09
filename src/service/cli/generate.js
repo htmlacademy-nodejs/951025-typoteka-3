@@ -47,6 +47,11 @@ const readContent = async (filePath) => {
 module.exports = {
   name: `--generate`,
   async run(args) {
+    if (count > MAX_ELEMENTS) {
+      console.error(chalk.red(`Нельзя записать в файл больше ${MAX_ELEMENTS} моков`));
+      process.exit(ExitCode.FAIL);
+    }
+
     const [sentences, titles, categories, comments] = await Promise.all([
       readContent(SENTENCES_PATH), readContent(TITLES_PATH),
       readContent(CATEGORIES_PATH), readContent(COMMENTS_PATH),
@@ -59,11 +64,6 @@ module.exports = {
     const [count] = args;
     const countMocks = Number.parseInt(count, 10) || MIN_ELEMENTS;
     const content = JSON.stringify(generateMocks(countMocks, contentType));
-
-    if (count > MAX_ELEMENTS) {
-      console.error(chalk.red(`Нельзя записать в файл больше ${MAX_ELEMENTS} моков`));
-      process.exit(ExitCode.FAIL);
-    }
 
     try {
       await fs.writeFile(FILE_NAME, content);

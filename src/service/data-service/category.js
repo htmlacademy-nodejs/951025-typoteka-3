@@ -1,15 +1,41 @@
+const Aliase = require(`../models/aliase`);
+const Sequelize = require(`sequelize`);
+
 class CategoryService {
-  constructor(articles) {
-    this._articles = articles;
+  constructor(sequelize) {
+    this._Category = sequelize.models.Category;
+    this._ArticleCategories = sequelize.models.ArticleCategories;
   }
 
-  getAll() {
-    const categories = this._articles.reduce((acc, article) => {
-      article.category.forEach((category) => acc.add(category));
-      return acc;
-    }, new Set());
+  async findAll(needCount) {
+    if (needCount) {
+      const countedCategories = await this._Category.findAll({
+        attributes: [
+          `id`,
+          `name`,
 
-    return [...categories];
+          [
+            Sequelize.fn(
+                `COUNT`,
+                `*`
+            ),
+            `count`
+          ]
+        ],
+
+        group: [Sequelize.col(`Category.id`)],
+
+        include: [{
+          model: this._ArticleCategories,
+          as: Aliase.ARTICLE_CATEGORIES,
+          attributes: []
+        }],
+      });
+
+      return countedCategories.map((category) => category.get());
+    }
+
+    return await this._Category.findAll({raw: true});
   }
 }
 

@@ -43,7 +43,7 @@ const generateArticles = (count, userCount, contentType) => (
     fullText: shuffle(contentType.sentences).slice(0, getRandomInt(1, contentType.sentences.length - 1)).join(` `),
     category: shuffle(contentType.categories).slice(0, getRandomInt(1, contentType.categories.length - 1)),
     comments: generateComments(getRandomInt(1, MAX_COMMENTS), index + 1, userCount, contentType.comments),
-    iserId: getRandomInt(1, userCount),
+    userId: getRandomInt(1, userCount),
   }))
 );
 

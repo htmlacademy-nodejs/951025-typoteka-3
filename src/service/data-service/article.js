@@ -32,12 +32,12 @@ class ArticleService {
     return articles.map((item) => item.get());
   }
 
-  findOne(id) {
-    return this._Article.findByPk(id, {include: [Aliase.CATEGORIES]});
+  async findOne(id) {
+    return await this._Article.findByPk(id, {include: [Aliase.CATEGORIES]});
   }
 
   async update(id, article) {
-    const [affectedRows] = await this._Offer.update(article, {
+    const [affectedRows] = await this._Article.update(article, {
       where: {id}
     });
 

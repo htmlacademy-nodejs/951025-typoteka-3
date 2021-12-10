@@ -1,7 +1,6 @@
 const request = require(`supertest`);
 const category = require(`./category`);
 const CategoryService = require(`../../data-service/category`);
-// const createApi = require(`../../helpers/create-api`);
 const {HttpCode} = require(`../../../const`);
 const {Sequelize} = require(`sequelize`);
 const express = require(`express`);

@@ -1,7 +1,6 @@
 const request = require(`supertest`);
 const search = require(`./search`);
 const SearchService = require(`../../data-service/search`);
-// const createApi = require(`../../helpers/create-api`);
 const {HttpCode} = require(`../../../const`);
 const {Sequelize} = require(`sequelize`);
 const express = require(`express`);

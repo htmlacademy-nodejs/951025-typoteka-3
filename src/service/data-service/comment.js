@@ -6,25 +6,18 @@ class CommentService {
   }
 
   async create(articleId, comment) {
-    return this._Comment.create({
+    return await this._Comment.create({
       articleId,
       ...comment
     });
   }
 
   async delete(id) {
-    const deletedRows = this._Comment.destroy({
+    const deletedRows = await this._Comment.destroy({
       where: {id}
     });
 
     return !!deletedRows;
-  }
-
-  findAllByArticleId(articleId) {
-    return this._Comment.findAll({
-      where: {articleId},
-      raw: true
-    });
   }
 
   async findAll({limit = false, withArticles = false}) {
@@ -39,8 +32,8 @@ class CommentService {
     return comments;
   }
 
-  findAllByArticleId(articleId) {
-    return this._Comment.findAll({
+  async findAllByArticleId(articleId) {
+    return await this._Comment.findAll({
       where: {articleId},
       raw: true
     });

@@ -9,8 +9,15 @@ module.exports = (app, articleService, commentService) => {
   app.use(`/articles`, route);
 
   route.get(`/`, async (req, res) => {
-    const articles = await articleService.findAll();
-    res.status(HttpCode.OK).json(articles);
+    const {offset, limit, comments} = req.query;
+    let result;
+
+    if (limit || offset) {
+      result = await articleService.findPage({limit, offset});
+    } else {
+      result = await articleService.findAll(comments);
+    }
+    res.status(HttpCode.OK).json(result);
   });
 
   route.get(`/:articleId`, async (req, res) => {
@@ -33,7 +40,7 @@ module.exports = (app, articleService, commentService) => {
 
   route.put(`/:articleId`, articleValidator, async (req, res) => {
     const {articleId} = req.params;
-    const existedArticle = await articleService.getOne(articleId);
+    const existedArticle = await articleService.findOne(articleId);
 
     if (!existedArticle) {
       return res.status(HttpCode.NOT_FOUND)
@@ -58,15 +65,15 @@ module.exports = (app, articleService, commentService) => {
   });
 
   route.get(`/:articleId/comments`, articleExists(articleService), async (req, res) => {
-    const {article} = res.locals;
-    const comments = await commentService.findAllByArticleId(article);
+    const {articleId} = req.params;
+    const comments = await commentService.findAllByArticleId(articleId);
 
-    res.status(HttpCode.OK).json(comments);
+    return res.status(HttpCode.OK).json(comments);
   });
 
   route.post(`/:articleId/comments`, [articleExists(articleService), commentValidator], async (req, res) => {
-    const {article} = res.locals;
-    const comment = await commentService.create(article, req.body);
+    const {articleId} = req.params;
+    const comment = await commentService.create(articleId, req.body);
 
     return res.status(HttpCode.CREATED).json(comment);
   });

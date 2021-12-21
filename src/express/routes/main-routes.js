@@ -3,15 +3,24 @@ const api = require(`../api`).getAPI();
 const {modifiedArticle} = require(`../helpers/articles`);
 const mainRoutes = new Router();
 
+const ARTICLES_PER_PAGE = 8;
+
 mainRoutes.get(`/`, async (req, res) => {
+  let {page = 1} = req.query;
+  page = +page;
+
+  const limit = ARTICLES_PER_PAGE;
+  const offset = (page - 1) * ARTICLES_PER_PAGE;
   try {
-    const [articles, categories, comments] = await Promise.all([
-      api.getArticles(),
+    const [{count, articles}, categories, comments] = await Promise.all([
+      api.getArticles({limit, offset}),
       api.getCategories(true),
       api.getComments(3),
     ]);
 
-    res.render(`main`, {articles: articles.map(modifiedArticle), categories, comments});
+    const totalPages = Math.ceil(count / ARTICLES_PER_PAGE);
+
+    res.render(`main`, {articles: articles.map(modifiedArticle), page, totalPages, categories, comments});
   } catch (error) {
     console.log(error);
   }
